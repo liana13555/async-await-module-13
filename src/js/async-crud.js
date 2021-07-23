@@ -8,14 +8,15 @@ async function addBook(book) {
     },
     body: JSON.stringify(book),
   };
+ 
+    const response = await fetch(`${BASE_URL}/books`, options);
+    const newBook = await response.json();
 
-  const response = await fetch(`${BASE_URL}/books`, options);
-  const newBook = await response.json();
-
-  return newBook;
+    return newBook;     // или просто return await response.json(); 
 }
+// Ошибку в async будем обрабатывать во внешнем коде try...catch
 
-// async function addBookAndUpdateUI() {
+// async function addBookAndUpdateUI() {  
 //   try {
 //     const book = await addBook({});
 //     console.log(book);
@@ -25,10 +26,15 @@ async function addBook(book) {
 // }
 
 // addBookAndUpdateUI();
+//----------------------------------------------------------------------
+// addBook(book).then().catch(); 
+// Если addBook(book) вызываем сами по себе, то она возвращает промис и тогда можем исп-ть then() и catch()
 
+// Вне тела ф-ии исп-ем then() и catch(), а внутри ф-ии - сделаем async и исп-ся try...catch
 async function fetchBooks() {
-  const response = await fetch(`${BASE_URL}/books`);
-  const books = await response.json();
+  const response = await fetch(`${BASE_URL}/books`)
+    
+  const books = await response.json() 
   return books;
 }
 
@@ -38,6 +44,7 @@ async function fetchBookById(bookId) {
   return book;
 }
 
+
 async function removeBook(bookId) {
   const url = `${BASE_URL}/books/${bookId}`;
   const options = {
@@ -45,9 +52,9 @@ async function removeBook(bookId) {
   };
 
   const response = await fetch(url, options);
-  const book = await response.json();
   return book;
 }
+
 
 async function updateBookById(update, bookId) {
   const options = {
@@ -59,6 +66,6 @@ async function updateBookById(update, bookId) {
   };
 
   const response = await fetch(`${BASE_URL}/books/${bookId}`, options);
-  const book = await response.json();
+  const book = response.json();
   return book;
 }
