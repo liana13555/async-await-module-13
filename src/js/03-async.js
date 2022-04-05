@@ -1,8 +1,7 @@
-// Синтаксис async/await - асинхронная ф-я, возвращает промис
+// Синтаксис async/await - асинхронная ф-я, возвращает промис. await ждет когда промис выполнится
 // Последовательные операции
 // Паралельные операции с Promise.all()
 // try...catch
-
 
 function getFruit(name) {
   const fruits = {
@@ -11,7 +10,7 @@ function getFruit(name) {
     apple: '🍎',
   };
 
-   return new Promise((resolve, reject) =>
+  return new Promise((resolve, reject) =>
     setTimeout(() => resolve(fruits[name]), 500),
   );
 }
@@ -44,10 +43,10 @@ function getFruit(name) {
 //   const apple = getFruit('apple');
 //   const kiwi = getFruit('kiwi');
 //   const berry = getFruit('strawberry');
-  
+
 //   const fruits = await Promise.all([apple, kiwi, berry]);
 //   console.log(fruits);
- 
+
 //   console.timeEnd('aMakeSmoothie'); // aMakeSmoothie: 502.875244140625 ms
 // }
 
@@ -63,15 +62,17 @@ async function aMakeSmoothie() {
 
     const fruits = await Promise.all([apple, kiwi, berry]);
     console.log(fruits);
+
     console.timeEnd('aMakeSmoothie');
 
     return fruits;
   } catch (error) {
-    console.log('Ошибка');
+    console.log('Ошибка' + error);
   }
 }
 
-aMakeSmoothie();
+// aMakeSmoothie();
+aMakeSmoothie().then(fruits => console.log(fruits))
 
 
 //======================================================
@@ -83,7 +84,7 @@ aMakeSmoothie();
 // const arr = async () => {}        - стрелочная ф-я
 
 // const x = {                       - метод объекта
-//   async getname () {} 
+//   async getName () {} 
 // }
 
 // class X {                        - метод класса

@@ -15,19 +15,19 @@ try {
   console.log('Внутри try до myVar');
   myVar;
   console.log('Внутри try после myVar');
-
-} catch {
+} catch (error) {
+  // console.log(error);
   console.log('Ошибка!');
 }
 
 console.log('После try...catch');
 
 // setTimeout(() => {
-//       try {
-//        myVar; 
-//       } catch (error) {
-//         console.log('Ошибка!');
-//       }
-//     }, 1000)
+//   try {
+//     myVar;
+//   } catch (error) {
+//     console.log('Ошибка!');
+//   }
+// }, 1000)
 
 // console.log('После try...catch');
